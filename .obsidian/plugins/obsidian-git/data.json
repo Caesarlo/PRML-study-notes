@@ -1,0 +1,16 @@
+{
+  "commitMessage": "manual: PRML notes backup {{date}}",
+  "autoCommitMessage": "auto: PRML notes backup {{date}}",
+  "commitDateFormat": "YYYY-MM-DD HH:mm:ss",
+  "autoSaveInterval": 30,
+  "autoPushInterval": 0,
+  "autoPullInterval": 0,
+  "disablePush": true,
+  "pullBeforePush": false,
+  "autoPullOnBoot": false,
+  "customMessageOnAutoBackup": false,
+  "refreshSourceControl": true,
+  "refreshSourceControlTimer": 7000,
+  "basePath": "",
+  "gitDir": ""
+}
