@@ -3,5 +3,11 @@
   "table-editor-obsidian",
   "dataview",
   "obsidian-excalidraw-plugin",
-  "obsidian-git"
+  "obsidian-git",
+  "obsidian-importer",
+  "obsidian-latex-suite",
+  "obsidian-local-rest-api",
+  "omnisearch",
+  "obsidian-tasks-plugin",
+  "templater-obsidian"
 ]
