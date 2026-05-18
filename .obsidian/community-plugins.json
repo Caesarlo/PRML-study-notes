@@ -1,12 +1,7 @@
 [
-  "obsidian-importer",
-  "obsidian-excalidraw-plugin",
-  "obsidian-local-rest-api",
-  "dataview",
-  "templater-obsidian",
-  "obsidian-tasks-plugin",
-  "omnisearch",
+  "obsidian-outliner",
   "table-editor-obsidian",
-  "obsidian-latex-suite",
+  "dataview",
+  "obsidian-excalidraw-plugin",
   "obsidian-git"
 ]

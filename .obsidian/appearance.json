@@ -1,3 +1,7 @@
 {
-  "theme": "moonstone"
+  "theme": "Obsidianotion",
+  "cssTheme": "Obsidianotion",
+  "enabledCssSnippets": [
+    "notion-blocks"
+  ]
 }

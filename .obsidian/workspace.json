@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "d95f7eb081cbe6ad",
+    "id": "main-split-prml",
     "type": "split",
     "children": [
       {
-        "id": "7d634ab6abccc7b1",
+        "id": "e9494de63375dfd2",
         "type": "tabs",
         "children": [
           {
-            "id": "9ab3baea15eedafd",
+            "id": "8e516171e4c9af93",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PRML/1. Introduction/Untitled.md",
+                "file": "PRML/1. Introduction/1.0 模式识别与机器学习概览.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "1.0 模式识别与机器学习概览"
             }
           }
         ]
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "d8f5c9a5ba93fe24",
+    "id": "left-split-prml",
     "type": "split",
     "children": [
       {
-        "id": "fae7fb098ed0757d",
+        "id": "left-tabs-prml",
         "type": "tabs",
         "children": [
           {
-            "id": "518c8cebd88b76d7",
+            "id": "leaf-files-prml",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +48,7 @@
             }
           },
           {
-            "id": "95c6bbd6d6be27a3",
+            "id": "leaf-search-prml",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +65,7 @@
             }
           },
           {
-            "id": "7392a77b58d2c8ca",
+            "id": "leaf-bookmarks-prml",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -81,20 +81,20 @@
     "width": 300
   },
   "right": {
-    "id": "14449121dbd06d74",
+    "id": "right-split-prml",
     "type": "split",
     "children": [
       {
-        "id": "2bea2089f3a156c2",
+        "id": "right-tabs-prml",
         "type": "tabs",
         "children": [
           {
-            "id": "b0755bf3286fb639",
+            "id": "leaf-backlinks-prml",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AI4SCI/AI4SCI/lammps.md",
+                "file": "PRML/1. Introduction/1.0 模式识别与机器学习概览.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,54 +104,79 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for lammps"
+              "title": "Backlinks for 1.0 模式识别与机器学习概览"
             }
           },
           {
-            "id": "d0e827df6a696540",
+            "id": "leaf-outgoing-prml",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "AI4SCI/AI4SCI/lammps.md",
+                "file": "PRML/1. Introduction/1.0 模式识别与机器学习概览.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from lammps"
+              "title": "Outgoing links from 1.0 模式识别与机器学习概览"
             }
           },
           {
-            "id": "88c6679a381b2253",
+            "id": "leaf-tags-prml",
             "type": "leaf",
             "state": {
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-tags",
               "title": "Tags"
             }
           },
           {
-            "id": "30c621f677aec7bf",
+            "id": "leaf-outline-prml",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "AI4SCI/AI4SCI/lammps.md"
+                "file": "PRML/1. Introduction/1.0 模式识别与机器学习概览.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of lammps"
+              "title": "Outline of 1.0 模式识别与机器学习概览"
+            }
+          },
+          {
+            "id": "leaf-advanced-tables-prml",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "advanced-tables-toolbar"
+            }
+          },
+          {
+            "id": "leaf-git-prml",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "git-view"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 313.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -162,63 +187,22 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "obsidian-importer:Open Importer": false,
-      "obsidian-excalidraw-plugin:New drawing": false,
-      "templater-obsidian:Templater": false,
-      "omnisearch:Omnisearch": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "obsidian-git:Open Git source control": false
+      "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "9ab3baea15eedafd",
+  "active": "leaf-files-prml",
   "lastOpenFiles": [
-    "README.md",
+    "PRML/1. Introduction/1.1 多项式曲线拟合.md",
+    "PRML/1. Introduction/1.0 模式识别与机器学习概览.md",
+    "PRML/1. Introduction/1. 模式识别与机器学习概览.md",
+    "PRML/1. Introduction/1.2 多项式曲线拟合.md",
+    "PRML/1. Introduction/assets/Pasted image 20260518212238.png",
+    "PRML/1. Introduction/assets",
     "PRML/1. Introduction/Untitled.md",
+    "Pasted image 20260518212022.png",
+    "Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf",
+    "README.md",
     "PRML/1. Introduction",
-    "Untitled",
-    "PRML",
-    "AI4SCI/AI4SCI/固态制冷/ABO3/ABO3/KNbO3.md",
-    "AI4SCI/AI4SCI/固态制冷/ABO3/ABO3/CaZrO3.md",
-    "AI4SCI/AI4SCI/固态制冷/ABO3/ABO3/BaTiO3.md",
-    "AI4SCI/AI4SCI/固态制冷/ABO3/ABO3/BaZrO3.md",
-    "AI4SCI/AI4SCI/固态制冷/材料结构/NaNbO3.md",
-    "AI4SCI/AI4SCI/固态制冷/1.2 电卡效应物理基础/电卡效应物理基础.md",
-    "AI4SCI/AI4SCI/固态制冷/1.2 电卡效应物理基础/1.2 电卡效应物理基础.md",
-    "未命名",
-    "未命名.md",
-    "image.png",
-    "image 1.png",
-    "未命名.canvas",
-    "AI4SCI/AI4SCI/多尺度建模/多尺度建模.md",
-    "AI4SCI/AI4SCI/【论文发表全过程 Advanced Functional Materials】高通量方法-机器学习构建材料数据库/【论文发表全过程 Advanced Functional Materials】高通量方法-机器学习构建材料数据库.md",
-    "image 3 2.png",
-    "image 2 13.png",
-    "image 2 8.png",
-    "image 2 4.png",
-    "image 1 17.png",
-    "image 1 11.png",
-    "image 1 5.png",
-    "AI4SCI/AI4SCI/论文精读/材料基因工程/材料基因工程.md",
-    "AI4SCI/AI4SCI/论文精读/论文精读.md",
-    "AI4SCI/AI4SCI/论文精读/Acomparative study ofmachine learning inpredicting the mechanical properties ofthedeposited AA6061 alloys via additive friction stirdeposition.md",
-    "image 1 3.png",
-    "AI4SCI/AI4SCI/lammps.md",
-    "AI4SCI/AI4SCI/DPGen.md",
-    "AI4SCI/AI4SCI/Applications of generative adversarial networks in materials science.md",
-    "AI4SCI/AI4SCI/AI4SCI论文收集.md",
-    "AI4SCI/AI4SCI/AI4SCI.md",
-    "AI4SCI/AI4SCI/想法.md",
-    "AI4SCI/AI4SCI/读论文.md",
-    "AI4SCI/AI4SCI/高通量计算与机器学习驱动高熵合金的研究进展.md",
-    "AI4SCI/AI4SCI/第一性计算原理.md",
-    "Welcome.md",
-    "AI4SCI/AI4SCI/博客收集.md",
-    "Spaldin_-_2012_-_A_beginners_guide_to_the_modern_theory_of_polariz.pdf",
-    "AI4SCI/AI4SCI/固态制冷/文献精读/General approach for efficient prediction of refrigeration performance in caloric materials/流程分析",
-    "AI4SCI/AI4SCI/固态制冷/文献精读/General approach for efficient prediction of refrigeration performance in caloric materials/全文",
-    "AI4SCI/AI4SCI/固态制冷/文献精读/A beginner's guide to the modern theory of polarization/全文翻译",
-    "AI4SCI/AI4SCI/固态制冷/调研/ABO$_3$结构/ABO3",
-    "AI4SCI/AI4SCI/固态制冷/调研/ABO$_3$结构",
-    "Untitled.canvas"
+    "PRML"
   ]
 }

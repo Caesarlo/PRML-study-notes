@@ -1,0 +1,27 @@
+.markdown-source-view.mod-cm6 .cm-line {
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin: 1px 0;
+}
+
+.markdown-source-view.mod-cm6 .cm-line:hover {
+  background: rgba(55, 53, 47, 0.06);
+}
+
+.markdown-preview-view p,
+.markdown-preview-view li,
+.markdown-preview-view blockquote,
+.markdown-preview-view .callout {
+  border-radius: 6px;
+}
+
+.markdown-preview-view p:hover,
+.markdown-preview-view li:hover {
+  background: rgba(55, 53, 47, 0.05);
+}
+
+.theme-dark .markdown-source-view.mod-cm6 .cm-line:hover,
+.theme-dark .markdown-preview-view p:hover,
+.theme-dark .markdown-preview-view li:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
