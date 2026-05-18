@@ -195,22 +195,33 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8311c23f44f2621b",
+  "active": "leaf-files-prml",
   "lastOpenFiles": [
-    "Untitled.base",
-    "README.md.tmp.61584.a888e5493a76",
+    "README.md.tmp.61584.7fb8e75f24ef",
+    "README.md.tmp.61584.70952dc9ff6d",
+    "Ch14 - Combining Models/assets",
+    "Ch14 - Combining Models",
+    "Ch13 - Sequential Data/assets",
+    "Ch13 - Sequential Data",
+    "Ch12 - Continuous Latent Variables/assets",
+    "Ch12 - Continuous Latent Variables",
+    "Ch11 - Sampling Methods/assets",
+    "Ch11 - Sampling Methods",
+    "Ch10 - Approximate Inference/assets",
+    "Ch01 - Introduction/assets/Pasted image 20260518212238.png",
+    "Ch01 - Introduction/1.1 多项式曲线拟合.md",
+    "Ch01 - Introduction/1.0 模式识别与机器学习概览.md",
+    "PRML/Ch01 - Introduction/assets/Pasted image 20260518212238.png",
+    "PRML/Ch01 - Introduction/1.1 多项式曲线拟合.md",
+    "PRML/Ch01 - Introduction/1.0 模式识别与机器学习概览.md",
     "2026-05-18.md",
     "PRML/1. Introduction/1.0 模式识别与机器学习概览.md",
     "PRML/1. Introduction/1.1 多项式曲线拟合.md",
     "PRML/1. Introduction/1. 模式识别与机器学习概览.md",
     "PRML/1. Introduction/1.2 多项式曲线拟合.md",
     "PRML/1. Introduction/assets/Pasted image 20260518212238.png",
-    "PRML/1. Introduction/assets",
     "PRML/1. Introduction/Untitled.md",
     "Pasted image 20260518212022.png",
-    "Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf",
-    "README.md",
-    "PRML/1. Introduction",
-    "PRML"
+    "README.md"
   ]
 }

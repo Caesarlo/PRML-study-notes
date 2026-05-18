@@ -25,7 +25,7 @@ PRML 是机器学习领域最经典的教材之一，系统覆盖了从概率论
 
 | # | 章节 | 核心概念 | 笔记 | 状态 |
 |---|------|----------|------|------|
-| 1 | Introduction | 模式识别、多项式拟合、概率论、信息论 | [📂](./PRML/1.%20Introduction) | 🔵 进行中 |
+| 1 | Introduction | 模式识别、多项式拟合、概率论、信息论 | [📂](./Ch01%20-%20Introduction) | 🔵 进行中 |
 | 2 | Probability Distributions | 高斯分布、指数族、非参数方法 | — | ⬜ 待开始 |
 | 3 | Linear Models for Regression | 贝叶斯线性回归、模型选择、证据近似 | — | ⬜ 待开始 |
 | 4 | Linear Models for Classification | 判别函数、生成式/判别式模型、Laplace 近似 | — | ⬜ 待开始 |
@@ -45,7 +45,7 @@ PRML 是机器学习领域最经典的教材之一，系统覆盖了从概率论
 ## Chapter 1 笔记索引
 
 ```
-PRML/1. Introduction/
+Ch01 - Introduction/
 ├── 1.0 模式识别与机器学习概览.md   监督/无监督/强化学习的基本框架
 └── 1.1 多项式曲线拟合.md           过拟合、正则化、模型选择的直觉入门
 ```
