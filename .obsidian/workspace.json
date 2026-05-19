@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 297.5
   },
   "right": {
     "id": "right-split-prml",
@@ -176,7 +176,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 313.5
+    "width": 313.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -197,11 +198,12 @@
   },
   "active": "8311c23f44f2621b",
   "lastOpenFiles": [
+    "Ch01 - Introduction/1.0 模式识别与机器学习概览.md",
+    "Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf",
+    "Ch01 - Introduction/1.1 多项式曲线拟合.md",
     "Ch01 - Introduction/assets/Pasted image 20260519104759.png",
     "Ch01 - Introduction/assets/Pasted image 20260519104745.png",
-    "Ch01 - Introduction/1.0 模式识别与机器学习概览.md",
     "Ch01 - Introduction/assets/Pasted image 20260519104706.png",
-    "Ch01 - Introduction/1.1 多项式曲线拟合.md",
     "Ch01 - Introduction/assets/Pasted image 20260518212238.png",
     "README.md",
     "README.md.tmp.61584.7fb8e75f24ef",
@@ -213,7 +215,6 @@
     "Ch12 - Continuous Latent Variables/assets",
     "Ch12 - Continuous Latent Variables",
     "Ch11 - Sampling Methods/assets",
-    "Ch11 - Sampling Methods",
     "PRML/Ch01 - Introduction/assets/Pasted image 20260518212238.png",
     "PRML/Ch01 - Introduction/1.1 多项式曲线拟合.md",
     "PRML/Ch01 - Introduction/1.0 模式识别与机器学习概览.md",
