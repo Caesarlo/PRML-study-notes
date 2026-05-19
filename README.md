@@ -4,6 +4,7 @@
 > Christopher M. Bishop, Springer, 2006
 
 [![进度](https://img.shields.io/badge/进度-Chapter%201-blue?style=flat-square)](./PRML)
+[![延伸博客](https://img.shields.io/badge/延伸博客-Gump.top-0EA5E9?style=flat-square)](https://www.gump.top/blog/series/prml)
 [![笔记工具](https://img.shields.io/badge/工具-Obsidian-7C3AED?style=flat-square&logo=obsidian&logoColor=white)](https://obsidian.md)
 [![语言](https://img.shields.io/badge/语言-Python%203-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 
@@ -88,6 +89,7 @@ pip install numpy matplotlib scikit-learn jupyter
 
 ## 参考资源
 
+- 🌐 [我的 PRML 系列博客](https://www.gump.top/blog/series/prml)：独立整理的 PRML 相关文章，与本仓库笔记内容不完全对应。
 - 📄 [官方书页（Springer）](https://www.springer.com/book/9780387310732)
 - 🎥 [Bishop 本人的讲座视频（微软研究院）](https://www.microsoft.com/en-us/research/video/pattern-recognition-machine-learning/)
 - 💻 [PRML 代码实现参考（prml-python）](https://github.com/ctgk/PRML)
