@@ -176,7 +176,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 313.5
+    "width": 313.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -195,7 +196,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "leaf-git-prml",
+  "active": "8311c23f44f2621b",
   "lastOpenFiles": [
     "Ch01 - Introduction/1.1 多项式曲线拟合.md",
     "Ch01 - Introduction/1.2 概率论.md",
