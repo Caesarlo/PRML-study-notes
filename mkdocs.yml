@@ -1,0 +1,58 @@
+site_name: PRML Study Notes
+site_description: Pattern Recognition and Machine Learning study notes
+site_url: https://caesarlo.github.io/PRML-study-notes/
+repo_url: https://github.com/Caesarlo/PRML-study-notes
+repo_name: Caesarlo/PRML-study-notes
+
+docs_dir: .mkdocs-src
+site_dir: .site
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.sections
+    - navigation.top
+    - toc.follow
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+hooks:
+  - hooks/obsidian_links.py
+
+exclude_docs: |
+  README.md
+
+nav:
+  - 首页: index.md
+  - Chapter 1 - Introduction:
+      - 1.0 模式识别与机器学习概览: Ch01 - Introduction/1.0 模式识别与机器学习概览.md
+      - 1.1 多项式曲线拟合: Ch01 - Introduction/1.1 多项式曲线拟合.md
+      - 1.2 概率论: Ch01 - Introduction/1.2 概率论.md

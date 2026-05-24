@@ -1,0 +1,13 @@
+[project]
+name = "prml-study-notes"
+version = "0.1.0"
+description = "PRML study notes published with MkDocs"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+docs = [
+  "mkdocs>=1.6,<2.0",
+  "mkdocs-material>=9.6",
+  "pymdown-extensions>=10.0",
+]
