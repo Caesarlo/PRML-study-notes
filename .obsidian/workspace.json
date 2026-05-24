@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 297.5
+    "width": 297.5,
+    "collapsed": true
   },
   "right": {
     "id": "right-split-prml",
@@ -176,8 +177,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 313.5,
-    "collapsed": true
+    "width": 313.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -198,11 +198,23 @@
   },
   "active": "8311c23f44f2621b",
   "lastOpenFiles": [
+    "uv.lock",
+    "scripts/prepare_docs.py",
+    "scripts",
+    "pyproject.toml",
+    "hooks/__pycache__/obsidian_links.cpython-312.pyc",
+    "hooks/__pycache__",
+    "javascripts/mathjax.js",
+    "javascripts",
+    "hooks/obsidian_links.py",
+    "hooks",
+    "index.md",
+    "mkdocs.yml",
+    "Ch01 - Introduction/assets/Pasted image 20260524174151.png",
     "Ch01 - Introduction/1.1 多项式曲线拟合.md",
     "Ch01 - Introduction/1.2 概率论.md",
     "Ch01 - Introduction/assets/Pasted image 20260524125356.png",
     "Ch01 - Introduction/1.0 模式识别与机器学习概览.md",
-    "Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf",
     "Ch01 - Introduction/assets/Pasted image 20260519172445.png",
     "README.md",
     "Ch01 - Introduction/assets/Pasted image 20260519140331.png",
@@ -210,15 +222,6 @@
     "Ch01 - Introduction/assets/Pasted image 20260519104745.png",
     "Ch01 - Introduction/assets/Pasted image 20260519104706.png",
     "Ch01 - Introduction/assets/Pasted image 20260518212238.png",
-    "README.md.tmp.61584.7fb8e75f24ef",
-    "README.md.tmp.61584.70952dc9ff6d",
-    "Ch14 - Combining Models/assets",
-    "Ch14 - Combining Models",
-    "Ch13 - Sequential Data/assets",
-    "Ch13 - Sequential Data",
-    "Ch12 - Continuous Latent Variables/assets",
-    "Ch12 - Continuous Latent Variables",
-    "Ch11 - Sampling Methods/assets",
     "PRML/Ch01 - Introduction/assets/Pasted image 20260518212238.png",
     "PRML/Ch01 - Introduction/1.1 多项式曲线拟合.md",
     "PRML/Ch01 - Introduction/1.0 模式识别与机器学习概览.md",
@@ -228,7 +231,6 @@
     "PRML/1. Introduction/1. 模式识别与机器学习概览.md",
     "PRML/1. Introduction/1.2 多项式曲线拟合.md",
     "PRML/1. Introduction/assets/Pasted image 20260518212238.png",
-    "PRML/1. Introduction/Untitled.md",
-    "Pasted image 20260518212022.png"
+    "PRML/1. Introduction/Untitled.md"
   ]
 }
