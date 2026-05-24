@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ch01 - Introduction/1.1 多项式曲线拟合.md",
+                "file": "Ch01 - Introduction/1.2 概率论.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1.1 多项式曲线拟合"
+              "title": "1.2 概率论"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ch01 - Introduction/1.1 多项式曲线拟合.md",
+                "file": "Ch01 - Introduction/1.2 概率论.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 1.1 多项式曲线拟合"
+              "title": "Outline of 1.2 概率论"
             }
           },
           {
@@ -176,8 +176,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 313.5,
-    "collapsed": true
+    "width": 313.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -196,12 +195,13 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8311c23f44f2621b",
+  "active": "leaf-git-prml",
   "lastOpenFiles": [
+    "Ch01 - Introduction/1.1 多项式曲线拟合.md",
+    "Ch01 - Introduction/1.2 概率论.md",
     "Ch01 - Introduction/assets/Pasted image 20260524125356.png",
     "Ch01 - Introduction/1.0 模式识别与机器学习概览.md",
     "Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf",
-    "Ch01 - Introduction/1.1 多项式曲线拟合.md",
     "Ch01 - Introduction/assets/Pasted image 20260519172445.png",
     "README.md",
     "Ch01 - Introduction/assets/Pasted image 20260519140331.png",
