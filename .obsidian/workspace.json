@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ch01 - Introduction/1.1 多项式曲线拟合.md",
+                "file": "Ch01 - Introduction/1.2 概率论.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 1.1 多项式曲线拟合"
+              "title": "Outline of 1.2 概率论"
             }
           },
           {
@@ -172,7 +172,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -195,7 +195,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8311c23f44f2621b",
+  "active": "leaf-outline-prml",
   "lastOpenFiles": [
     "Ch01 - Introduction/assets/Pasted image 20260526114021.png",
     "Ch01 - Introduction/assets/Pasted image 20260526100434.png",
