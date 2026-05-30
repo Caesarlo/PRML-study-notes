@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ch01 - Introduction/1.2 概率论.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1.2 概率论"
+              "title": "README"
             }
           }
         ]
@@ -176,7 +176,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 313.5
+    "width": 313.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -195,14 +196,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "leaf-git-prml",
+  "active": "8311c23f44f2621b",
   "lastOpenFiles": [
+    "Ch01 - Introduction/1.2 概率论.md",
     "Ch01 - Introduction/assets/Pasted image 20260526124712.png",
     "Ch01 - Introduction/assets/Pasted image 20260526114021.png",
     "Ch01 - Introduction/assets/Pasted image 20260526100434.png",
     "Ch01 - Introduction/assets/Pasted image 20260526100431.png",
     "Ch01 - Introduction/1.1 多项式曲线拟合.md",
-    "Ch01 - Introduction/1.2 概率论.md",
     "uv.lock",
     "scripts/prepare_docs.py",
     "scripts",
@@ -222,7 +223,6 @@
     "Ch01 - Introduction/assets/Pasted image 20260519140331.png",
     "Ch01 - Introduction/assets/Pasted image 20260519104759.png",
     "Ch01 - Introduction/assets/Pasted image 20260519104745.png",
-    "Ch01 - Introduction/assets/Pasted image 20260519104706.png",
     "PRML/Ch01 - Introduction/1.1 多项式曲线拟合.md",
     "PRML/Ch01 - Introduction/1.0 模式识别与机器学习概览.md",
     "2026-05-18.md",
