@@ -173,7 +173,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -196,7 +196,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "leaf-outline-prml",
+  "active": "leaf-git-prml",
   "lastOpenFiles": [
     "README.md",
     "Ch01 - Introduction/1.2 概率论.md",
