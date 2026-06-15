@@ -173,12 +173,11 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 313.5,
-    "collapsed": true
+    "width": 313.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -197,7 +196,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8311c23f44f2621b",
+  "active": "leaf-outline-prml",
   "lastOpenFiles": [
     "README.md",
     "Ch01 - Introduction/1.2 概率论.md",
