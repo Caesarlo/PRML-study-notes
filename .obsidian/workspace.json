@@ -172,7 +172,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -195,8 +195,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8311c23f44f2621b",
+  "active": "leaf-git-prml",
   "lastOpenFiles": [
+    "Ch01 - Introduction/assets/Pasted image 20260616164140.png",
     "README.md",
     "Ch01 - Introduction/1.2 概率论.md",
     "Ch01 - Introduction/assets/Pasted image 20260526124712.png",
