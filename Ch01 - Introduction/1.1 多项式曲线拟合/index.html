@@ -1,0 +1,1376 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Pattern Recognition and Machine Learning study notes">
+      
+      
+      
+        <link rel="canonical" href="https://caesarlo.github.io/PRML-study-notes/Ch01%20-%20Introduction/1.1%20%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88/">
+      
+      
+        <link rel="prev" href="../1.0%20%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%A7%88/">
+      
+      
+        <link rel="next" href="../1.2%20%E6%A6%82%E7%8E%87%E8%AE%BA/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>1.1 多项式曲线拟合 - PRML Study Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#11" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="PRML Study Notes" class="md-header__button md-logo" aria-label="PRML Study Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PRML Study Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1.1 多项式曲线拟合
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Caesarlo/PRML-study-notes" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Caesarlo/PRML-study-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="PRML Study Notes" class="md-nav__button md-logo" aria-label="PRML Study Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    PRML Study Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Caesarlo/PRML-study-notes" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Caesarlo/PRML-study-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1 - Introduction
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 1 - Introduction
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.0%20%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.0 模式识别与机器学习概览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.1 多项式曲线拟合
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.1 多项式曲线拟合
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题设置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多项式模型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        误差函数：最小二乘
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="误差函数：最小二乘">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        矩阵形式求解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        评估指标：RMS 误差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模型阶数 M 的影响（过拟合核心）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        过拟合与训练集大小的关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正则化：抑制过拟合
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="正则化：抑制过拟合">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正则化的解析解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lambda-m9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(\lambda\) 的影响（\(M=9\) 固定）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模型选择：如何确定 M 和 λ？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模型选择：如何确定 M 和 λ？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-set-hold-out-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法一：验证集（Validation Set / Hold-out Set）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法二：交叉验证（Cross-Validation）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充：从 1.1 通向概率视角
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        代码示例
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键概念总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.2%20%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2 概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题设置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多项式模型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        误差函数：最小二乘
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="误差函数：最小二乘">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        矩阵形式求解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        评估指标：RMS 误差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模型阶数 M 的影响（过拟合核心）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        过拟合与训练集大小的关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正则化：抑制过拟合
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="正则化：抑制过拟合">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正则化的解析解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lambda-m9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(\lambda\) 的影响（\(M=9\) 固定）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模型选择：如何确定 M 和 λ？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模型选择：如何确定 M 和 λ？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-set-hold-out-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法一：验证集（Validation Set / Hold-out Set）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法二：交叉验证（Cross-Validation）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充：从 1.1 通向概率视角
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        代码示例
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键概念总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="11">1.1 多项式曲线拟合<a class="headerlink" href="#11" title="Permanent link">&para;</a></h1>
+<h2 id="_1">问题设置<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>从函数 <span class="arithmatex">\(\sin(2\pi x)\)</span> 上采样 <span class="arithmatex">\(N=10\)</span> 个点，加入高斯噪声作为训练集：</p>
+<div class="arithmatex">\[
+t_n = \sin(2\pi x_n) + \epsilon, \quad \epsilon \sim \mathcal{N}(0, \sigma^2)
+\]</div>
+<ul>
+<li>输入：<span class="arithmatex">\(x_n \in [0, 1]\)</span>，均匀采样</li>
+<li>目标：给定新的 <span class="arithmatex">\(x\)</span>，预测对应的 <span class="arithmatex">\(t\)</span>，但<strong>不知道</strong>真实的 <span class="arithmatex">\(\sin(2\pi x)\)</span></li>
+</ul>
+<p>这是一个<strong>回归问题</strong>，也是理解过拟合、模型选择、正则化的最直观例子。</p>
+<hr />
+<h2 id="_2">多项式模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>用 <span class="arithmatex">\(M\)</span> 阶多项式拟合数据：</p>
+<div class="arithmatex">\[
+y(x, \mathbf{w}) = w_0 + w_1 x + w_2 x^2 + \cdots + w_M x^M = \sum_{j=0}^{M} w_j x^j
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\mathbf{w} = (w_0, w_1, \ldots, w_M)^T\)</span> 是待学习的参数向量</li>
+<li>虽然 <span class="arithmatex">\(y\)</span> 对 <span class="arithmatex">\(x\)</span> 是非线性的，但对 <span class="arithmatex">\(\mathbf{w}\)</span> 是<strong>线性</strong>的 → 线性模型，有解析解</li>
+</ul>
+<p><img alt="Pasted image 20260519104745.png" src="../assets/Pasted%20image%2020260519104745.png" /></p>
+<hr />
+<h2 id="_3">误差函数：最小二乘<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>定义<strong>平方和误差（Sum-of-Squares Error）</strong>：</p>
+<div class="arithmatex">\[
+E(\mathbf{w}) = \frac{1}{2} \sum_{n=1}^{N} \left[ y(x_n, \mathbf{w}) - t_n \right]^2
+\]</div>
+<ul>
+<li>系数 <span class="arithmatex">\(\frac{1}{2}\)</span> 是为了求导后形式更简洁</li>
+<li>因为 <span class="arithmatex">\(E(\mathbf{w})\)</span> 是关于系数 <span class="arithmatex">\(\mathbf{w}\)</span> 的二次函数，其导数关于 <span class="arithmatex">\(\mathbf{w}\)</span> 是线性的，所以可以得到闭式解。严格地说，当设计矩阵 <span class="arithmatex">\(\mathbf{\Phi}\)</span> 满列秩时，最小二乘解唯一；如果不满秩，则最优解可能不唯一。</li>
+</ul>
+<p><img alt="Pasted image 20260519104759.png" src="../assets/Pasted%20image%2020260519104759.png" /></p>
+<h3 id="_4">矩阵形式求解<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>令设计矩阵（Vandermonde 矩阵）<span class="arithmatex">\(\mathbf{\Phi}\)</span>，其中 <span class="arithmatex">\(\Phi_{nj} = x_n^j\)</span>：</p>
+<div class="arithmatex">\[
+\mathbf{\Phi} = \begin{pmatrix}
+1 &amp; x_1 &amp; x_1^2 &amp; \cdots &amp; x_1^M \\
+1 &amp; x_2 &amp; x_2^2 &amp; \cdots &amp; x_2^M \\
+\vdots &amp; &amp; &amp; &amp; \vdots \\
+1 &amp; x_N &amp; x_N^2 &amp; \cdots &amp; x_N^M
+\end{pmatrix}
+\]</div>
+<p>误差最小化的解析解（正规方程）：</p>
+<div class="arithmatex">\[
+\mathbf{w}^* = (\mathbf{\Phi}^T \mathbf{\Phi})^{-1} \mathbf{\Phi}^T \mathbf{t}
+\]</div>
+<blockquote>
+<p>原书 1.1 只强调该问题有闭式解，并未展开矩阵形式。这里写出正规方程是为了方便和后续线性回归衔接。实际数值计算中不建议显式求逆，高阶多项式会让 Vandermonde 矩阵病态，通常使用 <code>np.linalg.lstsq</code>、QR 分解或 SVD 更稳定。</p>
+</blockquote>
+<h3 id="rms">评估指标：RMS 误差<a class="headerlink" href="#rms" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+E_{RMS} = \sqrt{\frac{2E(\mathbf{w}^*)}{N}}
+\]</div>
+<p>除以 <span class="arithmatex">\(N\)</span> 便于不同大小数据集之间比较；开根号使单位与 <span class="arithmatex">\(t\)</span> 一致。</p>
+<hr />
+<h2 id="m">模型阶数 M 的影响（过拟合核心）<a class="headerlink" href="#m" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(M\)</span></th>
+<th>训练误差</th>
+<th>测试误差</th>
+<th>现象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>大</td>
+<td>大</td>
+<td>欠拟合，只能拟合常数</td>
+</tr>
+<tr>
+<td>1</td>
+<td>较大</td>
+<td>较大</td>
+<td>欠拟合，只能拟合直线</td>
+</tr>
+<tr>
+<td>3</td>
+<td>小</td>
+<td><strong>小</strong></td>
+<td>最佳，接近真实 <span class="arithmatex">\(\sin(2\pi x)\)</span></td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>0</strong></td>
+<td>极大</td>
+<td><strong>过拟合</strong>，完美穿过所有训练点</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Pasted image 20260519140331.png" src="../assets/Pasted%20image%2020260519140331.png" /></p>
+<blockquote>
+<p><strong>关键观察</strong>：<span class="arithmatex">\(M=9\)</span> 时模型有 10 个参数，恰好等于训练点数，能完美插值，但泛化极差。</p>
+</blockquote>
+<p><span class="arithmatex">\(M=9\)</span> 时系数 <span class="arithmatex">\(\mathbf{w}\)</span> 的绝对值会<strong>极其巨大</strong>（正负交替），曲线在数据点之间剧烈震荡。这是过拟合的典型信号。</p>
+<hr />
+<h2 id="_5">过拟合与训练集大小的关系<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>固定 <span class="arithmatex">\(M=9\)</span>，增大 <span class="arithmatex">\(N\)</span>：</p>
+<ul>
+<li><span class="arithmatex">\(N=15\)</span>：过拟合减轻</li>
+<li><span class="arithmatex">\(N=100\)</span>：拟合曲线接近 <span class="arithmatex">\(\sin(2\pi x)\)</span>
+<img alt="Pasted image 20260519172445.png" src="../assets/Pasted%20image%2020260519172445.png" />
+<em>所示数据集的<span class="arithmatex">\(M=9\)</span>次多项式拟合，使用正则化误差函数在正则化参数<span class="arithmatex">\(λ\)</span>的两个取值（对应于<span class="arithmatex">\(ln λ = −18\)</span>和<span class="arithmatex">\(ln λ = 0\)</span>）下的结果。无正则化的情况，即<span class="arithmatex">\(λ=0\)</span>（对应于<span class="arithmatex">\(ln λ = −∞\)</span>）。</em></li>
+</ul>
+<blockquote>
+<p><strong>结论</strong>：过拟合是模型复杂度与数据量之间的失衡。数据量越多，可以支撑越复杂的模型。</p>
+</blockquote>
+<p>原书给出的粗略经验是：数据点数量不应少于自适应参数数量的若干倍，例如 5 倍或 10 倍。不过原书也特别提醒，<strong>参数数量并不一定是模型复杂度的最佳度量</strong>。</p>
+<hr />
+<h2 id="_6">正则化：抑制过拟合<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>在误差函数中加入<strong>惩罚项</strong>，限制参数的增长：</p>
+<div class="arithmatex">\[
+\tilde{E}(\mathbf{w}) = \frac{1}{2} \sum_{n=1}^{N} \left[ y(x_n, \mathbf{w}) - t_n \right]^2 + \frac{\lambda}{2} \|\mathbf{w}\|^2
+\]</div>
+<p>其中：
+$$
+|\mathbf{w}|^2 = \mathbf{w}^T \mathbf{w} = w_0^2 + w_1^2 + \cdots + w_M^2
+$$</p>
+<p>常用于控制过拟合现象的一种技术是正则化，它涉及在误差函数中添加一个惩罚项，以阻止系数达到较大的值。</p>
+<ul>
+<li><span class="arithmatex">\(\lambda\)</span>：正则化系数，控制惩罚强度</li>
+<li>这种方法在统计学中称为<strong>岭回归（Ridge Regression）</strong>，在机器学习中称为<strong>权重衰减（Weight Decay）</strong></li>
+<li>注意：原书指出，通常 <span class="arithmatex">\(w_0\)</span> 可以不参与正则化，因为惩罚 <span class="arithmatex">\(w_0\)</span> 会使结果依赖于目标变量原点的选择；也可以给 <span class="arithmatex">\(w_0\)</span> 单独设置正则化系数</li>
+</ul>
+<h3 id="_7">正则化的解析解<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>如果所有参数都参与 L2 正则化，则闭式解可以写为：</p>
+<div class="arithmatex">\[
+\mathbf{w}^* = (\mathbf{\Phi}^T \mathbf{\Phi} + \lambda \mathbf{I})^{-1} \mathbf{\Phi}^T \mathbf{t}
+\]</div>
+<p>如果不惩罚偏置项 <span class="arithmatex">\(w_0\)</span>，可以把 <span class="arithmatex">\(\mathbf{I}\)</span> 换成：</p>
+<div class="arithmatex">\[
+\mathbf{R} = \operatorname{diag}(0, 1, 1, \ldots, 1)
+\]</div>
+<p>对应为：</p>
+<div class="arithmatex">\[
+\mathbf{w}^* = (\mathbf{\Phi}^T \mathbf{\Phi} + \lambda \mathbf{R})^{-1} \mathbf{\Phi}^T \mathbf{t}
+\]</div>
+<h3 id="lambda-m9"><span class="arithmatex">\(\lambda\)</span> 的影响（<span class="arithmatex">\(M=9\)</span> 固定）<a class="headerlink" href="#lambda-m9" title="Permanent link">&para;</a></h3>
+<p>这里使用 <span class="arithmatex">\(\ln \lambda\)</span> 而不是直接使用 <span class="arithmatex">\(\lambda\)</span>，是因为正则化强度通常要在<strong>数量级</strong>上调节。<span class="arithmatex">\(\lambda\)</span> 必须是非负数，而且有效范围可能从非常接近 0 到 1、10 甚至更大；直接画 <span class="arithmatex">\(\lambda\)</span> 会把很小的取值挤在一起，不容易观察变化。取自然对数后，乘法尺度被转换成加法尺度：</p>
+<div class="arithmatex">\[
+\ln \lambda = -18 \quad \Longleftrightarrow \quad \lambda = e^{-18} \approx 1.5 \times 10^{-8}
+\]</div>
+<p>因此 <span class="arithmatex">\(\ln \lambda = -\infty\)</span> 对应 <span class="arithmatex">\(\lambda = 0\)</span>，也就是没有正则化；<span class="arithmatex">\(\ln \lambda = 0\)</span> 对应 <span class="arithmatex">\(\lambda = 1\)</span>。这里的 <span class="arithmatex">\(\ln\)</span> 只是为了更方便地展示和比较不同数量级的正则化强度。</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\ln \lambda\)</span></th>
+<th>现象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(-\infty\)</span>（无正则化）</td>
+<td>过拟合，系数巨大</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(-18\)</span>（适中）</td>
+<td>系数受控，拟合效果接近 <span class="arithmatex">\(M=3\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0\)</span>（<span class="arithmatex">\(\lambda=1\)</span>，过强）</td>
+<td>欠拟合，曲线过于平滑</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align: right;">ln λ = −∞</th>
+<th style="text-align: right;">ln λ = −18</th>
+<th style="text-align: right;">ln λ = 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(w_0^*\)</span></td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: right;">0.13</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w_1^*\)</span></td>
+<td style="text-align: right;">232.37</td>
+<td style="text-align: right;">4.74</td>
+<td style="text-align: right;">-0.05</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w_2^*\)</span></td>
+<td style="text-align: right;">-5321.83</td>
+<td style="text-align: right;">-0.77</td>
+<td style="text-align: right;">-0.06</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w_3^*\)</span></td>
+<td style="text-align: right;">48568.31</td>
+<td style="text-align: right;">-31.97</td>
+<td style="text-align: right;">-0.05</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w_4^*\)</span></td>
+<td style="text-align: right;">-231639.30</td>
+<td style="text-align: right;">-3.89</td>
+<td style="text-align: right;">-0.03</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w_5^*\)</span></td>
+<td style="text-align: right;">640042.26</td>
+<td style="text-align: right;">55.28</td>
+<td style="text-align: right;">-0.02</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w_6^*\)</span></td>
+<td style="text-align: right;">-1061800.52</td>
+<td style="text-align: right;">41.32</td>
+<td style="text-align: right;">-0.01</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w_7^*\)</span></td>
+<td style="text-align: right;">1042400.18</td>
+<td style="text-align: right;">-45.95</td>
+<td style="text-align: right;">-0.00</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w_8^*\)</span></td>
+<td style="text-align: right;">-557682.99</td>
+<td style="text-align: right;">-91.53</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w_9^*\)</span></td>
+<td style="text-align: right;">125201.43</td>
+<td style="text-align: right;">72.68</td>
+<td style="text-align: right;">0.01</td>
+</tr>
+</tbody>
+</table>
+<p>从极端情况看：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>参数行为</th>
+<th>模型行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\lambda \to 0\)</span></td>
+<td>系数可以很大</td>
+<td>容易过拟合</td>
+</tr>
+<tr>
+<td>适中的 <span class="arithmatex">\(\lambda\)</span></td>
+<td>系数被控制</td>
+<td>泛化较好</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lambda \to \infty\)</span></td>
+<td>系数趋近于 0</td>
+<td>容易欠拟合</td>
+</tr>
+<tr>
+<td><img alt="Pasted image 20260524125356.png" src="../assets/Pasted%20image%2020260524125356.png" /></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><em><span class="arithmatex">\(M=9\)</span> 多项式的均方根误差 (1.3) 相对于 <span class="arithmatex">\(ln λ\)</span>的图</em></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>原书 Figure 1.8 的重点是：在固定 <span class="arithmatex">\(M=9\)</span> 时，<span class="arithmatex">\(\lambda\)</span> 控制模型的<strong>有效复杂度</strong>，进而决定过拟合程度。也就是说，复杂度不只由多项式阶数 <span class="arithmatex">\(M\)</span> 决定。</p>
+</blockquote>
+<hr />
+<h2 id="m_1">模型选择：如何确定 M 和 λ？<a class="headerlink" href="#m_1" title="Permanent link">&para;</a></h2>
+<h3 id="validation-set-hold-out-set">方法一：验证集（Validation Set / Hold-out Set）<a class="headerlink" href="#validation-set-hold-out-set" title="Permanent link">&para;</a></h3>
+<p>从训练数据中划分一部分作为验证集，选在验证集上误差最小的超参数。</p>
+<p>缺点：减少了可用训练数据。</p>
+<h3 id="cross-validation">方法二：交叉验证（Cross-Validation）<a class="headerlink" href="#cross-validation" title="Permanent link">&para;</a></h3>
+<p>将数据分成 <span class="arithmatex">\(S\)</span> 折，每次用 <span class="arithmatex">\(S-1\)</span> 折训练、1 折验证，重复 <span class="arithmatex">\(S\)</span> 次取平均。</p>
+<ul>
+<li><span class="arithmatex">\(S=N\)</span>：留一交叉验证（Leave-One-Out），计算开销大</li>
+</ul>
+<blockquote>
+<p>交叉验证是对原书 1.1 中验证集思想的自然扩展；本节原文主要强调 hold-out validation，并指出这种方式会浪费宝贵的训练数据。</p>
+</blockquote>
+<hr />
+<h2 id="11_1">补充：从 1.1 通向概率视角<a class="headerlink" href="#11_1" title="Permanent link">&para;</a></h2>
+<p>原书 1.1 的最后并没有完整推导概率模型，而是给出一个重要预告：</p>
+<ul>
+<li>最小二乘法可以看作最大似然估计（Maximum Likelihood）的一个特例</li>
+<li>过拟合可以理解为最大似然方法中的一般问题</li>
+<li>贝叶斯方法可以缓解过拟合，即使参数数量超过数据点数量也并不必然有问题</li>
+</ul>
+<p>如果假设观测噪声是高斯分布：</p>
+<div class="arithmatex">\[
+t_n = y(x_n, \mathbf{w}) + \epsilon_n, \quad \epsilon_n \sim \mathcal{N}(0, \beta^{-1})
+\]</div>
+<p>则：</p>
+<div class="arithmatex">\[
+p(t_n \mid x_n, \mathbf{w}, \beta) = \mathcal{N}(t_n \mid y(x_n, \mathbf{w}), \beta^{-1})
+\]</div>
+<p>最大化整个训练集的似然：</p>
+<div class="arithmatex">\[
+p(\mathbf{t} \mid \mathbf{x}, \mathbf{w}, \beta) = \prod_{n=1}^{N} \mathcal{N}(t_n \mid y(x_n, \mathbf{w}), \beta^{-1})
+\]</div>
+<p>等价于最小化平方和误差。这解释了为什么平方误差在高斯噪声假设下是自然的选择。</p>
+<p>进一步地，后续章节会说明：L2 正则化可以从贝叶斯角度解释为给参数加零均值高斯先验：</p>
+<div class="arithmatex">\[
+p(\mathbf{w} \mid \alpha) = \mathcal{N}(\mathbf{w} \mid \mathbf{0}, \alpha^{-1}\mathbf{I})
+\]</div>
+<p>此时 MAP 估计会得到类似正则化平方误差的目标函数，并且正则化强度可以理解为先验强度与噪声精度之间的相对关系：</p>
+<div class="arithmatex">\[
+\lambda = \frac{\alpha}{\beta}
+\]</div>
+<blockquote>
+<p>这部分是为了衔接 PRML 后续章节，不属于 1.1 原文的完整推导。</p>
+</blockquote>
+<hr />
+<h2 id="_8">代码示例<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># ── 1. 生成数据 ──────────────────────────────────────────────</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">x_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">t_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x_train</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">x_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">t_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x_test</span><span class="p">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># ── 2. 构建 Vandermonde 设计矩阵 ─────────────────────────────</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">design_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">increasing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># shape: (N, M+1)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="c1"># ── 3. 最小二乘拟合 ──────────────────────────────────────────</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">fit_poly</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">Phi</span> <span class="o">=</span> <span class="n">design_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="c1"># 理论上可写正规方程；实践中 lstsq 比显式求逆更稳定</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">return</span> <span class="n">w</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="c1"># ── 4. 正则化拟合（岭回归）───────────────────────────────────</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="k">def</span><span class="w"> </span><span class="nf">fit_poly_regularized</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">lam</span><span class="p">):</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="n">Phi</span> <span class="o">=</span> <span class="n">design_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="c1"># w* = (ΦᵀΦ + λI)⁻¹ Φᵀ t</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">A</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Phi</span> <span class="o">+</span> <span class="n">lam</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">t</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="k">return</span> <span class="n">w</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="c1"># ── 5. 预测与 RMS 误差 ───────────────────────────────────────</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="n">M</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    <span class="n">Phi</span> <span class="o">=</span> <span class="n">design_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="k">return</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">w</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="k">def</span><span class="w"> </span><span class="nf">rms_error</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="c1"># ── 6. 不同 M 的效果对比 ─────────────────────────────────────</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">]):</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">fit_poly</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training data&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">t_test</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sin(2πx)&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;M=</span><span class="si">{</span><span class="n">M</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M = </span><span class="si">{</span><span class="n">M</span><span class="si">}</span><span class="s1">  |  Train RMS = </span><span class="si">{</span><span class="n">rms_error</span><span class="p">(</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">),</span><span class="w"> </span><span class="n">t_train</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;assets/poly_fit_M_comparison.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a><span class="c1"># ── 7. RMS vs M ──────────────────────────────────────────────</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="n">Ms</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="n">train_errors</span><span class="p">,</span> <span class="n">test_errors</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">Ms</span><span class="p">:</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">fit_poly</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>    <span class="n">train_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rms_error</span><span class="p">(</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">t_train</span><span class="p">))</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>    <span class="n">test_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rms_error</span><span class="p">(</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">t_test</span><span class="p">))</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ms</span><span class="p">,</span> <span class="n">train_errors</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ms</span><span class="p">,</span> <span class="n">test_errors</span><span class="p">,</span> <span class="s1">&#39;ro-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;RMS Error&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;RMS Error vs Polynomial Order M&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;assets/rms_vs_M.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="c1"># ── 8. 正则化效果（M=9，不同 λ）──────────────────────────────</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">ln_lam</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>    <span class="n">lam</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">ln_lam</span> <span class="o">==</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_lam</span><span class="p">)</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>    <span class="k">if</span> <span class="n">lam</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>        <span class="n">w</span> <span class="o">=</span> <span class="n">fit_poly</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>        <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;No regularization (λ=0)&#39;</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>        <span class="n">w</span> <span class="o">=</span> <span class="n">fit_poly_regularized</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">lam</span><span class="p">)</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>        <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;ln λ = </span><span class="si">{</span><span class="n">ln_lam</span><span class="si">}</span><span class="s1">&#39;</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>
+<a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">t_test</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sin(2πx)&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;M=9&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;assets/regularization_comparison.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="_9">关键概念总结<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>模型复杂度（M）↑  →  训练误差 ↓，测试误差先降后升（过拟合）
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>数据量（N）↑      →  相同 M 下过拟合减轻
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>正则化（λ）↑      →  系数绝对值 ↓，偏差 ↑，方差 ↓
+</code></pre></div>
+<blockquote>
+<p><strong>本节的核心矛盾</strong>：我们希望模型足够复杂以捕捉数据规律，又不希望它把噪声也记住。这个矛盾的本质是<strong>偏差-方差权衡（Bias-Variance Trade-off）</strong>，将在第 3 章从贝叶斯角度给出更系统的解答。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "toc.follow", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
